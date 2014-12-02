@@ -20,7 +20,7 @@ namespace producer_consumer
 
         public void Run()
         {
-            for (int i = 0; i > _howMany; i++)
+            for (int i = 0; i < _howMany; i++)
             {
                 _buffer.Add(i);
                 Console.WriteLine("Add:{0} Count={1}", i, _buffer.Count);

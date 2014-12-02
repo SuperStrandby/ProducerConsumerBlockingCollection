@@ -18,6 +18,7 @@ namespace producer_consumer
             Consumer con = new Consumer(_buffer);
 
             Parallel.Invoke(prod.Run, con.Run);
+            
         }
     }
 }
