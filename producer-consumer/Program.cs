@@ -11,13 +11,15 @@ namespace producer_consumer
     {
         static void Main(string[] args)
         {
-            BlockingCollection<int> _buffer = new BlockingCollection<int>(100);
+            BlockingCollection<int> _buffer = new BlockingCollection<int>(40);
+            BlockingCollection<int> _buffer2 = new BlockingCollection<int>(40);
 
-            Producer prod = new Producer(_buffer, 50);
+            Producer prod = new Producer(_buffer, 40);
 
-            Consumer con = new Consumer(_buffer);
+            Consumer con = new Consumer(_buffer2);
+            Middleman mid = new Middleman(_buffer, _buffer2);
 
-            Parallel.Invoke(prod.Run, con.Run);
+            Parallel.Invoke(prod.Run, con.Run, mid.Run);
             
         }
     }
