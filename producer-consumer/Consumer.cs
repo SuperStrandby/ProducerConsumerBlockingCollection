@@ -9,10 +9,14 @@ namespace producer_consumer
 {
     public class Consumer
     {
-        BlockingCollection<int> _buffer = new BlockingCollection<int>();
+        private BlockingCollection<int> _buffer;
 
         public Consumer(BlockingCollection<int> buffer)
         {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
+            }
             _buffer = buffer;
         }
 
@@ -20,10 +24,11 @@ namespace producer_consumer
         {
             while (!_buffer.IsCompleted)
             {
-                int i = -1;
+                
                 try
                 {
-                    i = _buffer.Take();
+                    int i = _buffer.Take();
+                    Console.WriteLine("Take:{0} ", i);
                 }
                 catch (InvalidOperationException)
                 {
@@ -31,7 +36,7 @@ namespace producer_consumer
                     break;
 
                 }
-                Console.WriteLine("Take:{0} ", i);
+                
             }
             Console.WriteLine("\r\nNo more items to take. Press the Enter key to exit.");
         }

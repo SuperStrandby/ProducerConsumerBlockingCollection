@@ -10,9 +10,11 @@ namespace producer_consumer
     public class Producer
     {
         public int _howMany = 500;
-        BlockingCollection<int> _buffer = new BlockingCollection<int>(); 
+        private BlockingCollection<int> _buffer; 
         public Producer(BlockingCollection<int> buffer, int howMany)
         {
+            if (buffer == null) { throw new ArgumentNullException("buffer"); }
+            if (howMany <= 0) { throw new ArgumentOutOfRangeException("howMany"); }
             _buffer = buffer;
             _howMany = howMany;
 
